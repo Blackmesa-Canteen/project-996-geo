@@ -9,5 +9,9 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./page/home/home.component').then((m) => m.HomeComponent)
+  },
+  {
+    path: 'slides',
+    loadComponent: () => import('./page/slides-demo/slides-demo.component').then((m) => m.SlidesDemoComponent)
   }
 ];
