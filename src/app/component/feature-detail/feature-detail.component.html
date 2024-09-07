@@ -2,7 +2,9 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
+        <ion-button (click)="handleExit()">
+          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
       </ion-buttons>
       <ion-title>Feature Detail</ion-title>
     </ion-toolbar>
@@ -19,7 +21,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <img src="assets/images/preview.jpg"/>
+        <ion-img class="feature-detail-img ion-padding" src="assets/images/preview.jpg"></ion-img>
       </ion-item>
       <ion-item>
         <ion-icon name="cog-outline"></ion-icon>
@@ -34,4 +36,17 @@
 
     </ion-card-content>
   </ion-card>
+
+  <!--back button with icon -->
+  <div class="ion-padding feature-detail-button-group">
+    <ion-button fill="outline" class="ion-padding-end" (click)="handleExit()">
+      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      Exit
+    </ion-button>
+    <!--Print button with icon -->
+    <ion-button>
+      <ion-icon slot="start" name="print-outline"></ion-icon>
+      Print
+    </ion-button>
+  </div>
 </ion-content>
