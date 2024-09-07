@@ -15,14 +15,21 @@ export class SlidesDemoComponent  implements OnInit {
   }
 
   ranges = [
-    { label: 'Range 1', value: 25 },
-    { label: 'Range 2', value: 25 },
-    { label: 'Range 3', value: 25 },
-    { label: 'Range 4', value: 25 },
+    { label: 'Range 1', value: 25, locked: false },
+    { label: 'Range 2', value: 25, locked: false },
+    { label: 'Range 3', value: 25, locked: false },
+    { label: 'Range 4', value: 25, locked: false },
   ];
+
+  previousValues: number[] = this.ranges.map(range => range.value);
 
   get total(): number {
     return this.ranges.reduce((acc, range) => acc + range.value, 0);
+  }
+
+  onKnobMoveStart(index: number) {
+    // Save the current values before any change
+    this.previousValues = this.ranges.map(range => range.value);
   }
 
   onKnobMoveEnd(event: any, index: number) {
@@ -30,25 +37,41 @@ export class SlidesDemoComponent  implements OnInit {
     const diff = 100 - total;
 
     if (diff !== 0) {
-      this.adjustOtherRanges(index, diff);
+      const success = this.adjustOtherRanges(index, diff);
+      if (!success) {
+        // If adjustment fails, reset to previous values
+        this.resetToPreviousValues();
+      }
     }
   }
 
-  adjustOtherRanges(changedIndex: number, diff: number) {
-    const otherRanges = this.ranges.filter((_, i) => i !== changedIndex);
-    const totalOtherValues = otherRanges.reduce((acc, range) => acc + range.value, 0);
+  adjustOtherRanges(changedIndex: number, diff: number): boolean {
+    const unlockedRanges = this.ranges.filter((range, i) => i !== changedIndex && !range.locked);
+    const totalUnlockedValues = unlockedRanges.reduce((acc, range) => acc + range.value, 0);
 
-    otherRanges.forEach((range, i) => {
-      const adjustment = (range.value / totalOtherValues) * diff;
-      range.value += adjustment;
+    if (totalUnlockedValues === 0) {
+      // If all other ranges are locked and total is not 100, we need to adjust the changed range back
+      return false;
+    }
+
+    unlockedRanges.forEach(range => {
+      const adjustment = (range.value / totalUnlockedValues) * diff;
+      range.value = Math.min(100, Math.max(0, range.value + adjustment));
     });
 
     // Ensure the total is exactly 100 due to possible floating-point precision issues
     const newTotal = this.total;
     if (newTotal !== 100) {
       const correction = 100 - newTotal;
-      this.ranges[changedIndex].value += correction;
+      this.ranges[changedIndex].value = Math.min(100, Math.max(0, this.ranges[changedIndex].value + correction));
     }
+
+    return true;
   }
 
+  resetToPreviousValues() {
+    this.ranges.forEach((range, i) => {
+      range.value = this.previousValues[i];
+    });
+  }
 }

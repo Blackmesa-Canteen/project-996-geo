@@ -6,9 +6,12 @@
 
 <ion-content>
   <div *ngFor="let range of ranges; let i = index">
-    <ion-range [(ngModel)]="range.value" (ionKnobMoveEnd)="onKnobMoveEnd($event, i)">
-      <ion-label slot="start">{{ range.label }}</ion-label>
-      <ion-label slot="end">{{ range.value }}</ion-label>
+    <ion-item>
+      <ion-label>{{ range.label }}</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="range.locked"></ion-checkbox>
+    </ion-item>
+    <ion-range [(ngModel)]="range.value" (ionKnobMoveStart)="onKnobMoveStart(i)" (ionKnobMoveEnd)="onKnobMoveEnd($event, i)" [disabled]="range.locked" min="0" max="100">
+      <ion-label slot="start">{{ range.value }}</ion-label>
     </ion-range>
   </div>
   <div>Total: {{ total }}</div>
