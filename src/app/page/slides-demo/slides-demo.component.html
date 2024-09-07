@@ -8,8 +8,12 @@
   <div *ngFor="let range of ranges; let i = index">
     <ion-item>
       <ion-label>{{ range.label }}</ion-label>
-      <ion-checkbox slot="start" [(ngModel)]="range.locked"></ion-checkbox>
-      <ion-checkbox slot="end" [(ngModel)]="range.ignore" (ionChange)="onIgnoreChange()"></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="range.locked">
+        Lock
+      </ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="range.ignore" (ionChange)="onIgnoreChange()">
+        Ignore
+      </ion-checkbox>
     </ion-item>
     <ion-range
       [(ngModel)]="range.value"
