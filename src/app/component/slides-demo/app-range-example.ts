@@ -95,4 +95,10 @@ export class AppRangeExample implements OnInit {
       }
     });
   }
+
+  // New reset method to be called from the parent component
+  resetRanges() {
+    this.resetAndRedistributeValues();
+    this.rangesChange.emit(this.ranges);
+  }
 }
