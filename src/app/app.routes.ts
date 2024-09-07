@@ -11,7 +11,11 @@ export const routes: Routes = [
     loadComponent: () => import('./page/home/home.component').then((m) => m.HomeComponent)
   },
   {
+    path: 'category-filter',
+    loadComponent: () => import('./page/category-filter/category-filter.component').then((m) => m.CategoryFilterComponent)
+  },
+  {
     path: 'slides',
-    loadComponent: () => import('./page/slides-demo/slides-demo.component').then((m) => m.SlidesDemoComponent)
+    loadComponent: () => import('./component/slides-demo/app-range-example').then((m) => m.AppRangeExample)
   }
 ];

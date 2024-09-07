@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dynamic Filter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-range-example [ranges]="ranges" (rangesChange)="onRangesChange($event)"></app-range-example>
+
+  <div class="ion-margin ion-text-center">
+    <ion-button (click)="onApplyButtonClicked()">Confirm</ion-button>
+    <ion-button class="ion-padding-start" fill="outline" (click)="onResetButtonClicked()">Reset</ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+</ion-footer>

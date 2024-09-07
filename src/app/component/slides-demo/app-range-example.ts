@@ -1,26 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {IntegerPipe} from "../../util/integer.pipe";
 
 @Component({
-  selector: 'app-slides-demo',
-  templateUrl: './slides-demo.component.html',
-  styleUrls: ['./slides-demo.component.scss'],
+  selector: 'app-range-example',
+  templateUrl: './app-range-example.html',
+  styleUrls: ['./app-range-example.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, IntegerPipe]
 })
-export class SlidesDemoComponent  implements OnInit {
+export class AppRangeExample implements OnInit {
   ngOnInit(): void {
   }
 
-  ranges = [
+  @Input() ranges = [
     { label: 'Range 1', value: 25, locked: false, ignore: false },
     { label: 'Range 2', value: 25, locked: false, ignore: false },
     { label: 'Range 3', value: 25, locked: false, ignore: false },
     { label: 'Range 4', value: 25, locked: false, ignore: false },
   ];
+
+  @Output() rangesChange = new EventEmitter<any[]>();
 
   previousValues: number[] = this.ranges.map(range => range.value);
 
@@ -92,5 +94,11 @@ export class SlidesDemoComponent  implements OnInit {
         range.value = newValue;
       }
     });
+  }
+
+  // New reset method to be called from the parent component
+  resetRanges() {
+    this.resetAndRedistributeValues();
+    this.rangesChange.emit(this.ranges);
   }
 }
