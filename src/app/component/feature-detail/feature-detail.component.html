@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Feature Detail</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{
+          (featureDetail$ | async)?.title
+        }}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <img src="assets/images/preview.jpg"/>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="cog-outline"></ion-icon>
+        <ion-label class="ion-padding-start">
+          <ion-text>
+            {{
+                (featureDetail$ | async)?.description
+              }}
+          </ion-text>
+        </ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

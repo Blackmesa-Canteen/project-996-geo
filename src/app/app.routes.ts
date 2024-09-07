@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import {FeatureDetailComponent} from "./component/feature-detail/feature-detail.component";
 
 export const routes: Routes = [
   {
@@ -17,5 +18,9 @@ export const routes: Routes = [
   {
     path: 'slides',
     loadComponent: () => import('./component/slides-demo/app-range-example').then((m) => m.AppRangeExample)
+  },
+  {
+    path: 'feature-details',
+    loadComponent: () => import('./component/feature-detail/feature-detail.component').then((m) => m.FeatureDetailComponent)
   }
 ];
