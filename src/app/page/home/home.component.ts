@@ -58,10 +58,9 @@ export class HomeComponent implements OnInit {
   private initDynamicFilterData() {
     this.store.dispatch(
       setKeyValue({key: DYNAMIC_FILTER_RESULT_KEY, value: [
-          { label: 'Range 1', value: 25, locked: false, ignore: false },
-          { label: 'Range 2', value: 25, locked: false, ignore: false },
-          { label: 'Range 3', value: 25, locked: false, ignore: false },
-          { label: 'Range 4', value: 25, locked: false, ignore: false },
+          { label: 'Distance from the grid', value: 33, locked: false, ignore: false },
+          { label: 'Solar radiation', value: 33, locked: false, ignore: false },
+          { label: 'Land area', value: 34, locked: false, ignore: false },
         ]})
     )
   }
