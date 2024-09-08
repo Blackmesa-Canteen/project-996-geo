@@ -19,29 +19,21 @@ import {isNotNil} from "rambda";
 export class CategoryFilterComponent  implements OnInit {
 
   @ViewChild(AppRangeExample) rangeComponent!: AppRangeExample;
-
-  private router = inject(Router);
   private store = inject(Store);
   private modalController = inject(ModalController);
 
-  constructor() { }
+  protected ranges: any[] = [];
 
   ngOnInit() {
     this.store.select(selectValueByKey(DYNAMIC_FILTER_RESULT_KEY)).subscribe((value) => {
       // if not empty, set the value to the range component
       if (isNotNil(value)) {
         console.log("set the existing value to the range component", value);
-        this.ranges = value;
+        // Clone the objects to ensure they are not frozen and properties are writable
+        this.ranges = value.map((range: any) => ({ ...range }));
       }
     });
   }
-
-  ranges = [
-    { label: 'Range 1', value: 25, locked: false, ignore: false },
-    { label: 'Range 2', value: 25, locked: false, ignore: false },
-    { label: 'Range 3', value: 25, locked: false, ignore: false },
-    { label: 'Range 4', value: 25, locked: false, ignore: false },
-  ];
 
   onRangesChange(newRanges: any[]) {
     this.ranges = newRanges;
