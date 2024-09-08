@@ -18,18 +18,11 @@ import {setKeyValue} from "../../data-access/store/key-value/key-value.actions";
 })
 export class FeatureDetailComponent implements OnInit {
 
-  private store = inject(Store);
-  private readonly navController = inject(NavController);
   private readonly modalController = inject(ModalController);
 
   @Input() featureDetail: { [key: string]: any } = {};
 
   ngOnInit() {
-    // init test data
-    // this.store.dispatch(setKeyValue({key: FEATURE_DETAILS_KEY, value: {
-    //     title: 'test',
-    //     description: 'test des',
-    // }}));
   }
 
   handleExit = async () => {

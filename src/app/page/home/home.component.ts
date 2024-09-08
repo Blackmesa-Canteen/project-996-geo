@@ -56,13 +56,15 @@ export class HomeComponent implements OnInit {
 
   handleFeatureClick(feature: any) {
     console.log("formattedData:", feature.properties)
-    this.modalController.create({
+    const modal = this.modalController.create({
        component: FeatureDetailComponent,
         componentProps: {
           featureDetail: feature.properties,
         },
       }
     )
+
+    modal.then((m) => m.present());
   }
 
   private invalidateSize = () => {
