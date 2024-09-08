@@ -1,23 +1,54 @@
 <ion-split-pane when="xs" contentId="main">
   <ion-menu contentId="main">
     <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>Menu</ion-title>
+      <ion-toolbar color="secondary">
+        <img
+          src="../../../assets/images/logo-solar.png"
+          alt="Logo"
+          style="height: 40px; vertical-align: middle; margin-left: 10px"
+        />
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
       <ion-item>
-        <ion-button class="ion-padding" (click)="presentDynamicFilterModal()">
-          Dynamic adjust Ranges
+        <ion-button class="ion-padding" (click)="presentDynamicFilterModal()" color="secondary">
+          Suitability Criteria
         </ion-button>
       </ion-item>
-
+      <h1 style="margin-left: 10px">Suitability Criteria</h1>
       <ion-item *ngFor="let range of ranges">
-        <ion-checkbox slot="start" [(ngModel)]="range.ignore" (ionChange)="onDynamicRangesMenuCheckboxChange($event, range)"></ion-checkbox>
+        <ion-checkbox
+          slot="start"
+          [(ngModel)]="range.ignore"
+          (ionChange)="onDynamicRangesMenuCheckboxChange($event, range)"
+        ></ion-checkbox>
         <ion-icon name="layers-outline" slot="start"></ion-icon>
         <ion-label>{{ range.label }}</ion-label>
       </ion-item>
 
+      <ion-content>
+        <h1 style="margin-left: 10px">Layers</h1>
+
+        <ion-list>
+          <!-- Land Parcel - Polygon (Enabled by default) -->
+          <ion-item>
+            <ion-label>Land Parcel - Polygon</ion-label>
+            <ion-checkbox checked></ion-checkbox>
+          </ion-item>
+
+          <!-- Land Parcel - Point -->
+          <ion-item>
+            <ion-label>Land Parcel - Point</ion-label>
+            <ion-checkbox></ion-checkbox>
+          </ion-item>
+
+          <!-- LGA -->
+          <ion-item>
+            <ion-label>Local Government Areas</ion-label>
+            <ion-checkbox></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-content>
     </ion-content>
   </ion-menu>
 
