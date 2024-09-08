@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {IonicModule, ModalController, NavController} from "@ionic/angular";
 import {Store} from "@ngrx/store";
@@ -22,19 +22,21 @@ export class FeatureDetailComponent implements OnInit {
   private readonly navController = inject(NavController);
   private readonly modalController = inject(ModalController);
 
-  protected featureDetail$: Observable<IFeatureDetailsData> = this.store.select(selectValueByKey(FEATURE_DETAILS_KEY)).pipe(
-    filter(isNotNil)
-  );
+  @Input() featureDetail: { [key: string]: any } = {};
 
   ngOnInit() {
     // init test data
-    this.store.dispatch(setKeyValue({key: FEATURE_DETAILS_KEY, value: {
-        title: 'test',
-        description: 'test des',
-    }}));
+    // this.store.dispatch(setKeyValue({key: FEATURE_DETAILS_KEY, value: {
+    //     title: 'test',
+    //     description: 'test des',
+    // }}));
   }
 
   handleExit = async () => {
     await this.modalController.dismiss();
+  }
+
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj);
   }
 }

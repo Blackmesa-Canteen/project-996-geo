@@ -1,52 +1,41 @@
 <ion-header>
-  <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button (click)="handleExit()">
-          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>Feature Detail</ion-title>
+        <ion-buttons slot="start">
+            <ion-button (click)="handleExit()">
+                <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Feature Detail</ion-title>
     </ion-toolbar>
-  </ion-header>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>{{
-          (featureDetail$ | async)?.title
-        }}
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-img class="feature-detail-img ion-padding" src="assets/images/preview.jpg"></ion-img>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="cog-outline"></ion-icon>
-        <ion-label class="ion-padding-start">
-          <ion-text>
-            {{
-                (featureDetail$ | async)?.description
-              }}
-          </ion-text>
-        </ion-label>
-      </ion-item>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{ featureDetail['title'] }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item *ngFor="let key of objectKeys(featureDetail)">
+                <ion-icon name="cog-outline"></ion-icon>
+                <ion-label class="ion-padding-start">
+                    <ion-text>
+                        <strong>{{ key }}:</strong> {{ featureDetail[key] }}
+                    </ion-text>
+                </ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
 
-    </ion-card-content>
-  </ion-card>
-
-  <!--back button with icon -->
-  <div class="ion-padding feature-detail-button-group">
-    <ion-button fill="outline" class="ion-padding-end" (click)="handleExit()">
-      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
-      Exit
-    </ion-button>
-    <!--Print button with icon -->
-    <ion-button>
-      <ion-icon slot="start" name="print-outline"></ion-icon>
-      Print
-    </ion-button>
-  </div>
+    <!--back button with icon -->
+    <div class="ion-padding feature-detail-button-group">
+        <ion-button fill="outline" class="ion-padding-end" (click)="handleExit()">
+            <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+            Exit
+        </ion-button>
+        <!--Print button with icon -->
+        <ion-button>
+            <ion-icon slot="start" name="print-outline"></ion-icon>
+            Print
+        </ion-button>
+    </div>
 </ion-content>
