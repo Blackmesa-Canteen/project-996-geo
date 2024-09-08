@@ -5,8 +5,6 @@
 
 Genie Parcel aims to create a dynamic site selection model for large-scale solar projects in Australia. The solution allows users to adjust various analysis parameters to identify optimal locations for solar installations, considering factors like energy output, environmental impact, and grid integration.
 
-This project was the Web Application for Govhack 2024. The project was developed using Angular, Leaflet, Ionic.
-
 Team Name: Hack-a-Vision
 
 ## Resources
