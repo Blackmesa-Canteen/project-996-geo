@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
     this.map = map;
     this.initializeMap();
     this.loadGeoJSON();
+    // this.loadPointGeoJSON();
     this.invalidateSize();
   }
 
@@ -146,7 +147,37 @@ export class HomeComponent implements OnInit {
   }
 
   loadGeoJSON() {
-    this.http.get('assets/test.geojson').subscribe((data: any) => {
+    this.http.get('assets/Property_Suitability_Polygon.geojson').subscribe((data: any) => {
+      L.geoJSON(data, {
+        style: function (feature) {
+          // this section will have code that will dynamically change the layer symbology based of suitability criteiea values
+          var color;
+          if (feature?.properties?.G30_S60_A10 >= 0 && feature?.properties?.G30_S60_A10 <= 10) {
+            color = '#215,25,28'; // Blue
+          } else if (feature?.properties?.G30_S60_A10 > 10 && feature?.properties?.G30_S60_A10 <= 20) {
+            color = '#232,91,59'; // Green
+          } else if (feature?.properties?.G30_S60_A10 > 20 && feature?.properties?.G30_S60_A10 <= 30) {
+            color = '#249,157,89'; // Yellow
+          }
+  
+          return {
+            fillColor: color,
+            fillOpacity: 0.1,
+            color: 'green', // Border color
+            weight: 1 // Border width
+          };
+        },
+        onEachFeature: (feature, layer) => {
+          layer.on('click', () => {
+            this.handleFeatureClick(feature);
+          });
+        },
+      }).addTo(this.map);
+    });
+  }
+  
+  loadPointGeoJSON() {
+    this.http.get('assets/Property_Suitability_Point.geojson').subscribe((data: any) => {
       L.geoJSON(data, {
         onEachFeature: (feature, layer) => {
           layer.on('click', () => {
