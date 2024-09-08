@@ -23,6 +23,7 @@ export class FeatureDetailComponent implements OnInit {
   @Input() featureDetail: { [key: string]: any } = {};
 
   ngOnInit() {
+
   }
 
   handleExit = async () => {
@@ -31,5 +32,11 @@ export class FeatureDetailComponent implements OnInit {
 
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
+  }
+
+  onPrintButtonClicked() {
+    setTimeout(async () => {
+      window.print();
+    }, 300);
   }
 }
