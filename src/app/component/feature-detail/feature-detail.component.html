@@ -15,6 +15,9 @@
             <ion-card-title>{{ featureDetail['title'] }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
+            <ion-item>
+                <ion-img class="feature-detail-img" src="assets/images/preview.jpg"></ion-img>
+            </ion-item>
             <ion-item *ngFor="let key of objectKeys(featureDetail)">
                 <ion-icon name="cog-outline"></ion-icon>
                 <ion-label class="ion-padding-start">

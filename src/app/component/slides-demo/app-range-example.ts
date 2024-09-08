@@ -89,10 +89,11 @@ export class AppRangeExample implements OnInit {
     const numOfActiveRanges = this.ranges.filter(range => !range.ignore).length;
     const newValue = numOfActiveRanges > 0 ? 100 / numOfActiveRanges : 0;
 
-    this.ranges.forEach(range => {
+    this.ranges = this.ranges.map(range => {
       if (!range.ignore) {
-        range.value = newValue;
+        return { ...range, value: newValue };
       }
+      return range;
     });
   }
 

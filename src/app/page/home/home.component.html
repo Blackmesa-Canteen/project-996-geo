@@ -5,7 +5,20 @@
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> Menu Content </ion-content>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-button class="ion-padding" (click)="presentDynamicFilterModal()">
+          Dynamic adjust Ranges
+        </ion-button>
+      </ion-item>
+
+      <ion-item *ngFor="let range of ranges">
+        <ion-checkbox slot="start" [(ngModel)]="range.ignore" (ionChange)="onDynamicFilterSideMenuCheckboxChange($event, range)"></ion-checkbox>
+        <ion-icon name="layers-outline" slot="start"></ion-icon>
+        <ion-label>{{ range.label }}</ion-label>
+      </ion-item>
+
+    </ion-content>
   </ion-menu>
 
   <div class="ion-page" id="main">
@@ -14,6 +27,13 @@
         <ion-title>Main View</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> Main View Content </ion-content>
+    <ion-content class="ion-padding">
+      <div
+        class="leaflet"
+        leaflet
+        (leafletMapReady)="onMapReady($event)"
+        [leafletOptions]="mapOptions"
+      ></div>
+    </ion-content>
   </div>
 </ion-split-pane>
