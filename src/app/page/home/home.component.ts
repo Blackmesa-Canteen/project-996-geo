@@ -1,10 +1,11 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {IonicModule, ModalController} from '@ionic/angular';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import * as L from 'leaflet';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {FeatureDetailComponent} from "../../component/feature-detail/feature-detail.component";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
+import {CategoryFilterComponent} from "../category-filter/category-filter.component";
 
 @Component({
   selector: 'app-home',
@@ -17,13 +18,14 @@ import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 export class HomeComponent implements OnInit {
   map!: L.Map;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   private modalController = inject(ModalController);
 
   protected mapOptions = {
-    zoom: 13,
-    center: L.latLng({ lat: -37, lng: 145})
+    zoom: 11,
+    center: L.latLng({lat: -37, lng: 145})
   } as L.MapOptions;
 
   onMapReady(map: L.Map) {
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.presentDynamicFilterModal();
   }
 
   initializeMap() {
@@ -44,7 +47,7 @@ export class HomeComponent implements OnInit {
 
   loadGeoJSON() {
     this.http.get('assets/test.geojson').subscribe((data: any) => {
-      const geojsonLayer = L.geoJSON(data, {
+      L.geoJSON(data, {
         onEachFeature: (feature, layer) => {
           layer.on('click', () => {
             this.handleFeatureClick(feature);
@@ -57,7 +60,7 @@ export class HomeComponent implements OnInit {
   handleFeatureClick(feature: any) {
     console.log("formattedData:", feature.properties)
     const modal = this.modalController.create({
-       component: FeatureDetailComponent,
+        component: FeatureDetailComponent,
         componentProps: {
           featureDetail: feature.properties,
         },
@@ -65,6 +68,12 @@ export class HomeComponent implements OnInit {
     )
 
     modal.then((m) => m.present());
+  }
+
+  protected presentDynamicFilterModal() {
+    this.modalController.create({
+      component: CategoryFilterComponent,
+    }).then((m) => m.present());
   }
 
   private invalidateSize = () => {
