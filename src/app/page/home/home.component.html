@@ -15,7 +15,12 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <div id="map"></div>
+      <div
+        class="leaflet"
+        leaflet
+        (leafletMapReady)="onMapReady($event)"
+        [leafletOptions]="mapOptions"
+      ></div>
     </ion-content>
   </div>
 </ion-split-pane>

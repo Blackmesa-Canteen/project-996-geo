@@ -34,6 +34,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/leaflet/dist/leaflet.css",
               {
                 "input": "node_modules/@ionic/angular/css/core.css"
               },
