@@ -1,4 +1,4 @@
-SOLAR SITE SUITABILITY ANALYSIS
+# SOLAR SITE SUITABILITY ANALYSIS
 This script is a work in progress. The GIS Analysis for the  ase study deomnstrated in our project submission was
 performed manually with QGIS.
 

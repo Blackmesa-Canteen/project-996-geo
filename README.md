@@ -9,7 +9,7 @@ Team Name: Hack-a-Vision
 
 ## Resources
 
-- You can find GIS scripts in the `GIS` folder of the repo.
+- You can find GIS scripts in the `GIS` folder of the repo. Readme is [here](GIS/README.md)
 
 - You can access to other evidence and resources by clicking the following links:
 [![Google Drive](https://github.com/mingzhe-work/govhack-2024-public/blob/main/solar/images/google-drive.png?raw=true)](https://drive.google.com/drive/folders/1Ud0CkX7K-ICbDKqE3qEQ-IPH7R0qb6aR)
