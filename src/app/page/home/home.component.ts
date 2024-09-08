@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   protected ranges: any[] = [];
 
   protected mapOptions = {
-    zoom: 11,
+    zoom: 7,
     center: L.latLng({lat: -37, lng: 145})
   } as L.MapOptions;
 
