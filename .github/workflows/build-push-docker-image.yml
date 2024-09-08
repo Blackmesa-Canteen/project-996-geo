@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: 996worker/project-996-GIS:latest
+          tags: 996worker/project-996-geo:latest
